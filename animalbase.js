@@ -3,6 +3,7 @@
 window.addEventListener("DOMContentLoaded", start);
 
 let allAnimals = [];
+let filteredList;
 let isAsc = true;
 
 const catBtn = document.querySelector("[data-filter=cat]");
@@ -60,7 +61,7 @@ function selectSorting(elm) {
 }
 
 function filterList(animalType) {
-  let filteredList = allAnimals;
+  filteredList = allAnimals;
 
   if (animalType === "cat") {
     catBtn.classList.add("filter_chosen");
@@ -77,8 +78,9 @@ function filterList(animalType) {
 }
 
 function sortList(sort) {
-  let sortedList = allAnimals;
+  let sortedList = filteredList;
   console.log(isAsc);
+
   if (sort === "name") {
     if (isAsc) {
       isAsc = !isAsc;
