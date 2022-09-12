@@ -21,6 +21,7 @@ const Animal = {
 // controller
 function start() {
   console.log("ready");
+
   // TODO: Add event-listeners to filter and sort buttons
   document.querySelectorAll("[data-action='filter']").forEach((button) => {
     button.addEventListener("click", selectFilter);
@@ -28,6 +29,7 @@ function start() {
 
   document.querySelectorAll(`[data-action="sort"]`).forEach((button) => {
     button.addEventListener("click", selectSorting);
+    // button.innerHTML += "&#8595";
   });
 
   loadJSON();
@@ -114,6 +116,36 @@ function sortList(sort) {
       sortedList = sortedList.sort(compareAgesDescending);
     }
   }
+  // *************** Tried to put arrows, could only add one more every time -- couldnt toggle it urgh
+  // if (isAsc) {
+  //   document.querySelectorAll(`[data-action="sort"]`).forEach((button) => {
+  //     console.log(button.innerHTML.replace("&#8595", "&#8593"));
+  //     // console.log(button.textContent);
+  //     button.innerHTML = button.innerHTML + `&#8595`;
+  //   });
+  // }
+  // if (!isAsc) {
+  //   document.querySelectorAll(`[data-action="sort"]`).forEach((button) => {
+  //     console.log(button.innerHTML);
+  //     console.log(button.textContent);
+  //     button.innerHTML += "&#8593";
+  //   });
+  // }
+  // // // // // //
+  // if (isAsc) {
+  //   console.log(`isAsc`);
+  //   document.querySelectorAll(`[data-action="sort"]`).forEach((button) => {
+  //     button.innerHTML.replace("&#8593", "&#8595");
+  //   });
+  // }
+  // if (!isAsc) {
+  //   console.log(`is not Asc`);
+  //   document.querySelectorAll(`[data-action="sort"]`).forEach((button) => {
+  //     button.innerHTML.replace("&#8595", "&#8593");
+  //   });
+  // }
+  // *******************
+
   displayList(sortedList);
 }
 
