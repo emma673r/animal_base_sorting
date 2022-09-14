@@ -18,6 +18,13 @@ const Animal = {
   age: 0,
 };
 
+const settings = {
+  filter: "*",
+  sortBy: "name",
+  sortDir: "asc",
+  direction: 1,
+};
+
 // controller
 function start() {
   console.log("ready");
@@ -57,7 +64,7 @@ function selectFilter(elm) {
 }
 
 function selectSorting(elm) {
-  const sort = elm.target.dataset.sort;
+  const sortBy = elm.target.dataset.sort;
   const sortDir = elm.target.dataset.sortDirection;
 
   // toggle the direction
@@ -66,8 +73,18 @@ function selectSorting(elm) {
   } else {
     elm.target.dataset.sortDirection = "asc";
   }
-  console.log(sort);
-  sortList(sort, sortDir);
+
+  // find old sortby elm
+  const oldElm = document.querySelector(`[data-sort="${settings.sortBy}"]`);
+  console.log(oldElm)
+  oldElm.classList.remove("sortby");
+
+  // indicate active sort
+  elm.target.classList.add("sortby");
+  settings.sortBy = sortBy;
+
+  console.log(sortBy);
+  sortList(sortBy, sortDir);
 }
 
 function filterList(animalType) {
@@ -87,22 +104,22 @@ function filterList(animalType) {
   displayList(filteredList);
 }
 
-function sortList(sort, sortDir) {
+function sortList(sortBy, sortDir) {
   let sortedList = filteredList;
-  let direction = 1;
+  let direction = -1;
 
   if (sortDir === "desc") {
-    direction = -1;
-  } else {
     direction = 1;
+  } else {
+    direction = -1;
   }
 
   sortedList = sortedList.sort(sortByProperty);
   console.log(isAsc);
 
   function sortByProperty(animalA, animalB) {
-    console.log(`sort is ${sort}`);
-    if (animalA[sort] < animalB[sort]) {
+    console.log(`sort is ${sortBy}`);
+    if (animalA[sortBy] < animalB[sortBy]) {
       return -1 * direction;
     } else {
       return 1 * direction;
